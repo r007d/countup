@@ -15,8 +15,9 @@
             margin: 0;
         }
         #counter {
-            font-size: 140px; /* Increase font size to 72px */
+            font-size: 10vw; /* Set font size relative to viewport width */
             color: #fb451e;
+            white-space: nowrap; /* Prevent text from wrapping */
         }
     </style>
 </head>
@@ -24,6 +25,13 @@
     <div id="counter">0 kg</div>
 
     <script>
+        // Function to dynamically adjust font size based on window width
+        function adjustFontSize() {
+            const windowWidth = window.innerWidth;
+            const fontSize = windowWidth * 0.1; // Adjust this factor for desired font size relative to window width
+            document.getElementById("counter").style.fontSize = fontSize + "px";
+        }
+
         // Set the target date and time (2nd September 2022 at 18:00:00 CET)
         const targetDate = new Date("2022-09-02T18:00:00+02:00");
         let kgCounter = 0;
@@ -41,7 +49,11 @@
         setInterval(updateCounter, 1000);
 
         // Initial update
+        adjustFontSize();
         updateCounter();
+
+        // Adjust font size on window resize
+        window.addEventListener("resize", adjustFontSize);
     </script>
 </body>
 </html>

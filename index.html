@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Count Up Timer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            text-align: center;
+        }
+        #counter {
+            font-size: 48px;
+            color: #fb451e;
+            margin-top: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="counter">0 kg</div>
+
+    <script>
+        // Set the target date and time (2nd September 2022 at 18:00:00 CET)
+        const targetDate = new Date("2022-09-02T18:00:00+02:00");
+        let kgCounter = 0;
+
+        function updateCounter() {
+            const currentDate = new Date();
+            const timeDifference = (currentDate - targetDate) / 1000;
+            kgCounter = Math.floor(timeDifference * 539);
+
+            // Update the counter text
+            document.getElementById("counter").textContent = kgCounter + " kg";
+        }
+
+        // Update the counter every second
+        setInterval(updateCounter, 1000);
+
+        // Initial update
+        updateCounter();
+    </script>
+</body>
+</html>

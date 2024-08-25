@@ -6,7 +6,7 @@
     <title>Count Up Timer</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: Helvetica, Arial, sans-serif;
             background-color: #ffffff;
             display: flex;
             justify-content: center;
@@ -41,8 +41,8 @@
             const timeDifference = (currentDate - targetDate) / 1000;
             kgCounter = Math.floor(timeDifference * 539);
 
-            // Update the counter text
-            document.getElementById("counter").textContent = kgCounter + " kg";
+            // Update the counter text with thousands separator
+            document.getElementById("counter").textContent = kgCounter.toLocaleString() + " kg";
         }
 
         // Update the counter every second
@@ -57,3 +57,4 @@
     </script>
 </body>
 </html>
+

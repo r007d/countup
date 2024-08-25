@@ -23,6 +23,7 @@
         #description {
             font-size: 2.5vw; /* 25% of the size of the counter */
             margin-bottom: 1vw; /* Space between description and counter */
+            word-wrap: break-word; /* Allow wrapping within the container */
         }
         #counter {
             font-size: 10vw; /* Set font size relative to viewport width */
@@ -38,12 +39,19 @@
     </div>
 
     <script>
-        // Function to dynamically adjust font sizes based on window width
-        function adjustFontSize() {
+        // Function to dynamically adjust font sizes and widths based on window width
+        function adjustSizes() {
             const windowWidth = window.innerWidth;
             const counterFontSize = windowWidth * 0.1; // 10% of the window width for counter
+            const descriptionFontSize = counterFontSize / 4; // 25% of the counter font size for description
+
+            // Adjust font sizes
             document.getElementById("counter").style.fontSize = counterFontSize + "px";
-            document.getElementById("description").style.fontSize = (counterFontSize / 4) + "px"; // 25% of the counter font size for description
+            document.getElementById("description").style.fontSize = descriptionFontSize + "px";
+
+            // Adjust the width of the description to match the width of the counter
+            const counterWidth = document.getElementById("counter").offsetWidth;
+            document.getElementById("description").style.maxWidth = counterWidth + "px";
         }
 
         // Set the target date and time (2nd September 2022 at 18:00:00 CET)
@@ -59,16 +67,20 @@
             document.getElementById("counter").textContent = kgCounter.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'") + " kg";
         }
 
-        // Update the counter every second
-        setInterval(updateCounter, 1000);
+        // Update the counter and adjust sizes every second
+        setInterval(() => {
+            updateCounter();
+            adjustSizes();
+        }, 1000);
 
         // Initial update
-        adjustFontSize();
+        adjustSizes();
         updateCounter();
 
-        // Adjust font sizes on window resize
-        window.addEventListener("resize", adjustFontSize);
+        // Adjust sizes on window resize
+        window.addEventListener("resize", adjustSizes);
     </script>
 </body>
 </html>
+
 

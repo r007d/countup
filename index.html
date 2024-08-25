@@ -17,10 +17,12 @@
         }
         #counter-container {
             color: #fb451e;
-            white-space: nowrap; /* Prevent text from wrapping */
+            white-space: normal; /* Allow text to wrap */
+            width: fit-content; /* Let the container fit the content */
         }
         #description {
-            font-size: 2vw; /* Smaller font size for the description */
+            font-size: 5vw; /* Half the size of the counter */
+            margin-bottom: 1vw; /* Space between description and counter */
         }
         #counter {
             font-size: 10vw; /* Set font size relative to viewport width */
@@ -36,11 +38,12 @@
     </div>
 
     <script>
-        // Function to dynamically adjust font size based on window width
+        // Function to dynamically adjust font sizes based on window width
         function adjustFontSize() {
             const windowWidth = window.innerWidth;
-            const fontSize = windowWidth * 0.1; // Adjust this factor for desired font size relative to window width
-            document.getElementById("counter").style.fontSize = fontSize + "px";
+            const counterFontSize = windowWidth * 0.1; // 10% of the window width for counter
+            document.getElementById("counter").style.fontSize = counterFontSize + "px";
+            document.getElementById("description").style.fontSize = (counterFontSize / 2) + "px"; // Half the counter font size for description
         }
 
         // Set the target date and time (2nd September 2022 at 18:00:00 CET)
@@ -63,8 +66,9 @@
         adjustFontSize();
         updateCounter();
 
-        // Adjust font size on window resize
+        // Adjust font sizes on window resize
         window.addEventListener("resize", adjustFontSize);
     </script>
 </body>
 </html>
+

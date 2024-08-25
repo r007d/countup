@@ -21,7 +21,7 @@
             width: fit-content; /* Let the container fit the content */
         }
         #description {
-            font-size: 18px; /* Fixed font size for the description */
+            font-size: 2.5vw; /* 25% of the size of the counter */
             margin-bottom: 1vw; /* Space between description and counter */
         }
         #counter {
@@ -32,7 +32,7 @@
 <body>
     <div id="counter-container">
         <div id="description">
-            Der Count-Up zählt die Schweizer Bauschuttmenge, die seit Beginn der Ausstellung am 02.09.2022 um 18:00 angefallen ist
+            Der Count-Up zählt die Schweizer Bauschuttmenge, die seit Beginn der Ausstellung "Die Schweiz: Ein Abriss" am 02.09.2022 um 18:00 angefallen ist
         </div>
         <div id="counter">0 kg</div>
     </div>
@@ -42,4 +42,33 @@
         function adjustFontSize() {
             const windowWidth = window.innerWidth;
             const counterFontSize = windowWidth * 0.1; // 10% of the window width for counter
-            document.getElementById("counter").style.fontSize = counterFontSize
+            document.getElementById("counter").style.fontSize = counterFontSize + "px";
+            document.getElementById("description").style.fontSize = (counterFontSize / 4) + "px"; // 25% of the counter font size for description
+        }
+
+        // Set the target date and time (2nd September 2022 at 18:00:00 CET)
+        const targetDate = new Date("2022-09-02T18:00:00+02:00");
+        let kgCounter = 0;
+
+        function updateCounter() {
+            const currentDate = new Date();
+            const timeDifference = (currentDate - targetDate) / 1000;
+            kgCounter = Math.floor(timeDifference * 539);
+
+            // Update the counter text with thousands separator using apostrophes
+            document.getElementById("counter").textContent = kgCounter.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'") + " kg";
+        }
+
+        // Update the counter every second
+        setInterval(updateCounter, 1000);
+
+        // Initial update
+        adjustFontSize();
+        updateCounter();
+
+        // Adjust font sizes on window resize
+        window.addEventListener("resize", adjustFontSize);
+    </script>
+</body>
+</html>
+

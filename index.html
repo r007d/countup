@@ -13,16 +13,27 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            text-align: center; /* Center the text content */
+        }
+        #counter-container {
+            color: #fb451e;
+            white-space: nowrap; /* Prevent text from wrapping */
+        }
+        #description {
+            font-size: 2vw; /* Smaller font size for the description */
         }
         #counter {
             font-size: 10vw; /* Set font size relative to viewport width */
-            color: #fb451e;
-            white-space: nowrap; /* Prevent text from wrapping */
         }
     </style>
 </head>
 <body>
-    <div id="counter">0 kg</div>
+    <div id="counter-container">
+        <div id="description">
+            Der Count-Up zählt die Schweizer Bauschuttmenge, die seit Beginn der Ausstellung am 02.09.2022 um 18:00 angefallen ist
+        </div>
+        <div id="counter">0 kg</div>
+    </div>
 
     <script>
         // Function to dynamically adjust font size based on window width
@@ -41,8 +52,8 @@
             const timeDifference = (currentDate - targetDate) / 1000;
             kgCounter = Math.floor(timeDifference * 539);
 
-            // Update the counter text with thousands separator
-            document.getElementById("counter").textContent = kgCounter.toLocaleString() + " kg";
+            // Update the counter text with thousands separator using apostrophes
+            document.getElementById("counter").textContent = kgCounter.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "'") + " kg";
         }
 
         // Update the counter every second
@@ -57,4 +68,3 @@
     </script>
 </body>
 </html>
-
